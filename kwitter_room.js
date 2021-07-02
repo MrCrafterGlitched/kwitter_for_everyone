@@ -14,6 +14,14 @@ var firebaseConfig = {
 //ADD YOUR FIREBASE LINKS HERE
 username=localStorage.getItem("userKey");
 document.getElementById("username").innerHTML="Welcome, "+username+"!"
+function Addroom() {
+      Room=document.getElementById("room_name").value
+      localStorage.setItem("roomKey",Room)
+      firebase.database().ref("/").child(Room).update({
+Purpose:"Adding Rooms"
+      });
+      window.location="kwitter_page.html"
+}
 function getData() {firebase.database().ref("/").on('value', function(snapshot) {document.getElementById("output").innerHTML = "";snapshot.forEach(function(childSnapshot) {childKey  = childSnapshot.key;
        Room_names = childKey;
       //Start code
