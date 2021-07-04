@@ -22,10 +22,26 @@ Purpose:"Adding Rooms"
       });
       window.location="kwitter_page.html"
 }
-function getData() {firebase.database().ref("/").on('value', function(snapshot) {document.getElementById("output").innerHTML = "";snapshot.forEach(function(childSnapshot) {childKey  = childSnapshot.key;
-       Room_names = childKey;
+function getData() {
+      firebase.database().ref("/").on('value', function(snapshot) {
+            document.getElementById("output").innerHTML = "";
+            snapshot.forEach(function(childSnapshot) {
+                  childKey  = childSnapshot.key;
+                  Room_names = childKey;
       //Start code
-
+         console.log(Room_names);
+         Row="<div class='room_name' id='"+Room_names+"'onclick='redirect(this.id)'>"+Room_names+"</div><hr>";
+         document.getElementById("output").innerHTML+=Row
       //End code
       });});}
 getData();
+function redirect(thisroom) {
+      console.log(thisroom)
+      localStorage.setItem("roomKey",thisroom)
+      window.location="kwitter_page.html"
+}
+function Logout() {
+      localStorage.removeItem("userKey")
+      localStorage.removeItem("roomKey")
+      window.location="index.html"
+}
